@@ -5,13 +5,10 @@ def Karatsuba(x, y, n):
     else:
         a, b = x // 10 ** (n // 2), x % 10 ** (n // 2)
         c, d = y // 10 ** (n // 2), y % 10 ** (n // 2)
-        p = a + b
-        q = c + d
-        ab = Karatsuba(a, c, n // 2)
-        cd = Karatsuba(b, d, n // 2)
-        pq = Karatsuba(p, q, n // 2)
-        print(pq)
-        return 10 ** n * Karatsuba(a, c, n // 2) + 10 ** (n // 2) * (pq - ab - cd) + Karatsuba(b, d, n // 2)
+        ac = Karatsuba(a, c, n // 2)
+        bd = Karatsuba(b, d, n // 2)
+        abcd = Karatsuba(a + b, c + d, n // 2)
+        return 10 ** n * ac + 10 ** (n // 2) * (abcd - ac - bd) + bd
 
 x, y, n = map(int, input().split())
 print(f"Recursive multiplication: {Karatsuba(x, y, n)}")
