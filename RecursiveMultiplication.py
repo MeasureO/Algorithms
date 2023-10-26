@@ -1,12 +1,14 @@
-# n - степень двойки
-def RecIntMult(x, y, n):
-    if n == 1:
-        return x * y
-    else:
-        a, b = x // 10 ** (n // 2), x % 10 ** (n // 2)
-        c, d = y // 10 ** (n // 2), y % 10 ** (n // 2)
-        return 10 ** n * RecIntMult(a, c, n // 2) + 10 ** (n // 2) * (RecIntMult(a, d, n // 2) + RecIntMult(b, c, n // 2)) + RecIntMult(b, d, n // 2)
+def RecIntMult(x, y):
+    if x < 10 and y < 10:
+            return x * y
+    m = max(len(str(x)), len(str(y)))
+    n = m // 2
+    a, b = x // 10 ** n, x % 10 ** n
+    c, d = y // 10 ** n, y % 10 ** n
+    ac = RecIntMult(a, c)
+    bd = RecIntMult(b, d)
+    return 10 ** (2 * n) * ac + 10 ** n * (RecIntMult(a, d) + RecIntMult(b, c)) + bd
 
-x, y, n = map(int, input().split())
-print(f"Recursive multiplication: {RecIntMult(x, y, n)}")
+x, y = map(int, input().split())
+print(f"Recursive multiplication: {RecIntMult(x, y)}")
 print(f"Multiplication: {x * y}")
