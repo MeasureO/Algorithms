@@ -7,8 +7,8 @@ def Karatsuba(x, y, n):
         c, d = y // 10 ** (n // 2), y % 10 ** (n // 2)
         ac = Karatsuba(a, c, n // 2)
         bd = Karatsuba(b, d, n // 2)
-        abcd = Karatsuba(a + b, c + d, n // 2)
-        return 10 ** n * ac + 10 ** (n // 2) * (abcd - ac - bd) + bd
+        ab_cd = Karatsuba(a + b, c + d, n // 2)
+        return 10 ** n * ac + 10 ** (n // 2) * (ab_cd - ac - bd) + bd
 
 x, y, n = map(int, input().split())
 print(f"Recursive multiplication: {Karatsuba(x, y, n)}")
