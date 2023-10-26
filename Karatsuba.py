@@ -7,9 +7,10 @@ def Karatsuba(x, y, n):
         c, d = y // 10 ** (n // 2), y % 10 ** (n // 2)
         p = a + b
         q = c + d
-        ab = Karatsuba(a, b, n)
-        cd = Karatsuba(c, d, n)
-        pq = Karatsuba(p, q, n)
+        ab = Karatsuba(a, c, n // 2)
+        cd = Karatsuba(b, d, n // 2)
+        pq = Karatsuba(p, q, n // 2)
+        print(pq)
         return 10 ** n * Karatsuba(a, c, n // 2) + 10 ** (n // 2) * (pq - ab - cd) + Karatsuba(b, d, n // 2)
 
 x, y, n = map(int, input().split())
