@@ -1,15 +1,15 @@
-# n - степень двойки
-def Karatsuba(x, y, n):
-    if n == 1:
+def Karatsuba(x, y):
+    if x < 10 and y < 10:
         return x * y
-    else:
-        a, b = x // 10 ** (n // 2), x % 10 ** (n // 2)
-        c, d = y // 10 ** (n // 2), y % 10 ** (n // 2)
-        ac = Karatsuba(a, c, n // 2)
-        bd = Karatsuba(b, d, n // 2)
-        ab_cd = Karatsuba(a + b, c + d, n // 2)
-        return 10 ** n * ac + 10 ** (n // 2) * (ab_cd - ac - bd) + bd
+    m = max(len(str(x)), len(str(y)))
+    n = m // 2
+    a, b = x // 10 ** n, x % 10 ** n
+    c, d = y // 10 ** n, y % 10 ** n
+    ac = Karatsuba(a, c)
+    bd = Karatsuba(b, d)
+    pq = Karatsuba(a + b, c + d)
+    return 10 ** (2 * n) * ac + 10 ** n * (pq - ac - bd) + bd
 
-x, y, n = map(int, input().split())
-print(f"Recursive multiplication: {Karatsuba(x, y, n)}")
+x, y = map(int, input().split())
+print(f"Recursive multiplication: {Karatsuba(x, y)}")
 print(f"Multiplication: {x * y}")
